@@ -37,6 +37,17 @@ export default class QuestionModel {
     return false
   }
 
+  answerWith(index: number): QuestionModel {
+    const isRight = this.#answers[index]?.isRight
+
+    const answers = this.#answers.map((answer, i) => {
+      const selected = index === i
+      return (selected || answer.isRight) ? answer.reveal() : answer
+    })
+
+    return new QuestionModel(this.#id, this.#question, answers, isRight)
+  }
+
   shuffleAnswers(): QuestionModel {
     let shuffledAnswers = shuffle(this.#answers)
     return new QuestionModel(this.#id, this.#question, shuffledAnswers, this.#isRight)
@@ -47,6 +58,7 @@ export default class QuestionModel {
       id: this.#id,
       question: this.#question,
       answers: this.#answers.map(ans => ans.toObject()),
+      isAnswered: this.isAnswered,
       isRight: this.#isRight
     }
   }
