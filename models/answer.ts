@@ -9,6 +9,14 @@ export default class AnswerModel {
     this.#seen = seen
   }
 
+  static right(value: string) {
+    return new AnswerModel(value, true)
+  }
+
+  static wrong(value: string) {
+    return new AnswerModel(value, true)
+  }
+
   get value() {
     return this.#value
   }
@@ -19,5 +27,13 @@ export default class AnswerModel {
 
   get seen() {
     return this.#seen
+  }
+
+  toObject() {
+    return {
+      value: this.#value,
+      isRight: this.#isRight,
+      seen: this.#seen
+    }
   }
 }
