@@ -1,5 +1,7 @@
+import { shuffle } from "../../../functions/arrays"
 import questions from "../questions"
 
 export default (req, res) => {
-  res.status(200).json(questions.map(question => question.id))
+  const questionsId = questions.map(question => question.id)
+  res.status(200).json(shuffle(questionsId))
 }

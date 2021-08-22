@@ -1,3 +1,4 @@
+import { shuffle } from "../functions/arrays"
 import AnswerModel from "./answer"
 
 export default class QuestionModel {
@@ -34,6 +35,11 @@ export default class QuestionModel {
       if (answer.seen) return true
     }
     return false
+  }
+
+  shuffleAnswers(): QuestionModel {
+    let shuffledAnswers = shuffle(this.#answers)
+    return new QuestionModel(this.#id, this.#question, shuffledAnswers, this.#isRight)
   }
 
   toObject() {
